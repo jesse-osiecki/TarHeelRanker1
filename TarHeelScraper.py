@@ -15,7 +15,10 @@ class PageScraper:
             self.body.append(anchor.text)
 
     def printPage(self):
-        print self.body
+        i = 0
+        for b in self.body:
+            print str(self.body[i])
+            i += 1
 
 
 class BookScraper:

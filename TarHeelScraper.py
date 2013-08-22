@@ -41,6 +41,6 @@ class BookScraper:
 
 
 def testLib():
-    t = BookScraper("http://tarheelreader.org/2013/07/10/how-ever-you-dance/")
+    t = BookScraper("http://tarheelreader.org/2013/07/02/dinosaurs-lived-long-ago/")
     print t.pageScrapers[0].title
     t.printBook()

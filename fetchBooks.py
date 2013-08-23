@@ -35,6 +35,7 @@ while True:
         bytes = fp.read().decode('utf-8')
         book = json.loads(bytes)
         try:
+            #make sure record doesnt exist
             bookDB.insert(
                 ID=int(book['ID']), slug=book['slug'],
                 author_id=int(book['author_id']), reviewed=book['reviewed'],

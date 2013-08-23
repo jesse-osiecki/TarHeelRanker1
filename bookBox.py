@@ -38,5 +38,5 @@ for r in resultset:
     for p in pages:
         print p['text']
     print '------'
-    break
+db.cleanup()
 db.close()

@@ -1,5 +1,6 @@
 '''fetch all the books from the site, save them in a local db'''
 
+import os
 from buzhug import Base
 import urllib
 import json
@@ -7,7 +8,7 @@ import os.path as osp
 import sys
 
 dbDir = os.getcwd()
-dbDir += 'TarHeelRanker/db'
+dbDir += '/db'
 mode = 'override'
 
 bookDB = Base(osp.join(dbDir, 'bookDB')).create(

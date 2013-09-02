@@ -6,7 +6,8 @@ import json
 import os.path as osp
 import sys
 
-dbDir = '/home/jesse/projects/TarHeelRanker/TarHeelRanker/db'
+dbDir = os.getcwd()
+dbDir += 'TarHeelRanker/db'
 mode = 'override'
 
 bookDB = Base(osp.join(dbDir, 'bookDB')).create(

@@ -8,11 +8,25 @@ import os
 class authorCheck:
     def __init__(self, books):
         self.books = books
+        self.authorDict = {}
 
     def check(self):
         for book in self.books:
+            if book.author not in self.authorDict:
+                #if there is no key for the author,
+                #make it and initialize to 0 score
+                self.authorDict[book.author] = 0
             if book.reviewed:
-                print 'true'
+                self.authorDict[book.author] += 1
+            else:
+                #will add more here eventually
+                if int(book.created[0:4]) < 2011:
+                    #if unreviwed and earlier than 2011 it is probably junk
+                    self.authorDict[book.author] -= 1
+
+    def printAuthorDict(self):
+        for i in self.authorDict:
+            print i, self.authorDict[i]
 
 
 class book:
@@ -39,7 +53,8 @@ class book:
         self.categories = ct
         self.rating_total = rt
         self.text = txt
-        print self.dbID, ' ', self.iD, ' ', self.title
+        print 'Creating book object:', 'dbID: ', self.dbID, ' THRID: ',
+        self.iD, ' ', self.title
 
 
 class bookDBHandler:

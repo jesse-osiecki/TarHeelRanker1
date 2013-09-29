@@ -38,7 +38,7 @@ class book:
     def __init__(self, dd, s, rc, au, rv, tt, md,
                  rd, ad, tg, cd, lk,
                  ai, i, tx, pg, ct,
-                 rt, txt):
+                 rt, txt, srs):
         self.dbID = dd
         self.status = s
         self.rating_count = rc
@@ -60,7 +60,7 @@ class book:
         self.text = txt
         print 'Creating book object:', 'dbID: ', self.dbID, ' THRID: ',
         self.iD, ' ', self.title
-
+	self.script_review_status = srs
 
 class bookDBHandler:
 
@@ -79,6 +79,7 @@ class bookDBHandler:
             #load specific book's json from bookDB
             jsonObj = json.loads(r.json)
             dbID = r.__id__
+	    script_review_status = r.script_review_status
             #put all relavant info into convienient fields.
             #Im sure there is a quicker way involving commas
             #with Python, will look at later
@@ -106,7 +107,6 @@ class bookDBHandler:
             #do the same for the pages
             for p in pages:
                 text.append(p['text'])
-
             #nice little book object
             #print dbID
             #break
@@ -114,7 +114,7 @@ class bookDBHandler:
                           author, rating_value, title, modified,
                           reviewed, audience, tags, created, link,
                           author_id, iD, typex, pages, categories,
-                          rating_total, text)
+                          rating_total, text, script_review_status)
             self.membooks.append(elBook)
 
     def closeDB(self):

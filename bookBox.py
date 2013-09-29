@@ -5,6 +5,11 @@ import json
 import os
 
 
+class bogoCheck:
+    def __init__(self, books):
+        self.books = books
+
+
 class authorCheck:
     def __init__(self, books):
         self.books = books

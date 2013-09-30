@@ -6,3 +6,9 @@ bhandle.loadDBIn()
 authorc = b.authorCheck(bhandle.membooks)
 authorc.check()
 authorc.printAuthorDict()
+
+#put bogochecks here
+
+#close and save
+bhandle.saveDB()
+bhandle.closeDB()

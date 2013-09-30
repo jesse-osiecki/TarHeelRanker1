@@ -60,7 +60,8 @@ class book:
         self.text = txt
         print 'Creating book object:', 'dbID: ', self.dbID, ' THRID: ',
         self.iD, ' ', self.title
-	self.script_review_status = srs
+        self.script_review_status = srs
+
 
 class bookDBHandler:
 
@@ -79,7 +80,7 @@ class bookDBHandler:
             #load specific book's json from bookDB
             jsonObj = json.loads(r.json)
             dbID = r.__id__
-	    script_review_status = r.script_review_status
+            script_review_status = r.script_review_status
             #put all relavant info into convienient fields.
             #Im sure there is a quicker way involving commas
             #with Python, will look at later
@@ -116,6 +117,12 @@ class bookDBHandler:
                           author_id, iD, typex, pages, categories,
                           rating_total, text, script_review_status)
             self.membooks.append(elBook)
+
+    def saveDB(self):
+        #for now the only thing that
+        #should be saved is the script_reviewed_status
+        for b in self.membooks:
+            self.resultset[b.dbID].script_review_status = b.script_review_status
 
     def closeDB(self):
         self.bookDB.cleanup()

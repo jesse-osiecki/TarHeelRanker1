@@ -58,8 +58,7 @@ class book:
         self.categories = ct
         self.rating_total = rt
         self.text = txt
-        print 'Creating book object:', 'dbID: ', self.dbID, ' THRID: ',
-        self.iD, ' ', self.title
+        print 'Creating book object:', 'dbID: ', self.dbID, '\n'
         self.script_review_status = srs
 
 

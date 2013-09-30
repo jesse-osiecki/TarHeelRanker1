@@ -19,7 +19,7 @@ def trainSPAM(trainable_words, bogoDIR=os.getcwd()+"/.bogofilter"):
     p1 = sp.Popen(["echo", trainable_words], stdout=sp.PIPE)
     #-e is for emmbeded, makes return codes simple
     #-s is for spam
-    p2 = sp.call(["bogofilter", "-e", "-s", "-d", bogoDIR], stdin=p1.stdout)
+    p2 = sp.call(["bogofilter", "-e", "-s", "-d",  bogoDIR], stdin=p1.stdout)
     p1.stdout.close()  # p1 SIGPIPE exit
     log.info("trainiSPAM on %s exitcode: %i", trainable_words, p2)
     return p2

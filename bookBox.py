@@ -38,7 +38,7 @@ class book:
     def __init__(self, dd, s, rc, au, rv, tt, md,
                  rd, ad, tg, cd, lk,
                  ai, i, tx, pg, ct,
-                 rt, txt, srs):
+                 rt, txt, srs, slug):
         self.dbID = dd
         self.status = s
         self.rating_count = rc
@@ -58,7 +58,8 @@ class book:
         self.categories = ct
         self.rating_total = rt
         self.text = txt
-        print 'Creating book object:', 'dbID: ', self.dbID, '\n'
+        self.slug = slug
+        print 'Creating book object:', 'dbID: ', self.dbID, self.slug, '\n'
         self.script_review_status = srs
 
 
@@ -103,6 +104,7 @@ class bookDBHandler:
             pages = jsonObj.get('pages')
             categories = jsonObj.get('categories')
             rating_total = jsonObj.get('rating_total')
+            slug = r.slug
             text = []
             #do the same for the pages
             for p in pages:
@@ -114,7 +116,7 @@ class bookDBHandler:
                           author, rating_value, title, modified,
                           reviewed, audience, tags, created, link,
                           author_id, iD, typex, pages, categories,
-                          rating_total, text, script_review_status)
+                          rating_total, text, script_review_status, slug)
             self.membooks.append(elBook)
 
     def saveDB(self):

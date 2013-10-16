@@ -19,7 +19,7 @@ def train(dbH):
             for p in b.text:
                 st += p
                 st += '\n'
-            bg = bogoWrapper.trainHAM(st)
+            bg = bogoWrapper.trainSPAM(st)
             print "trained spam: ", str(b.dbID), "\n"
             print "bogofilter exit status: ", str(bg)
 

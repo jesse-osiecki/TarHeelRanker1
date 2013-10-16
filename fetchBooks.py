@@ -39,12 +39,12 @@ while True:
         book = json.loads(bytes)
         try:
             #make sure record doesnt exist? Implelement later
-	    #check the stock reviewed status and put it in the field I will play with
-	    #2 is unsure spam, 1 is HAM, 0 is spam. The json only has T/F right now so will work with that
-	    spam = 2
-	    if book['reviewed']:
-		    spam = 1
-		
+            #check the stock reviewed status and put it in the field I will play with
+            #2 is unsure spam, 1 is HAM, 0 is spam. The json only has T/F right now so will work with that
+            spam = 2
+            if book['reviewed']:
+                spam = 1
+
 
             bookDB.insert(
                 ID=int(book['ID']), slug=book['slug'],

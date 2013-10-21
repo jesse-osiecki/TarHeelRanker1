@@ -3,11 +3,31 @@
 from buzhug import Base
 import json
 import os
+import bogoWrapper as bg
 
 
 class bogoCheck:
     def __init__(self, books):
         self.books = books
+        self.checkedBooks = {}
+
+    def check(self):
+        for book in self.books:
+            if book.reviewed:
+                print book.slug, 'reviewed'
+            else:
+                allText = ''
+                for i in book.text:
+                    allText += i
+                    allText += '\n'
+                rval = bg.bogofilter(allText)
+                #book.script_review_status = rval
+                #this is mostly for debugging purposes
+                #makes a dict of all books looked at and
+                #what the final decision was in this specific
+                #test
+                self.checkedBooks[book.iD] = rval
+                print 'Book', book.slug, book.iD, 'checked as ', rval
 
 
 class authorCheck:
@@ -15,7 +35,7 @@ class authorCheck:
         self.books = books
         self.authorDict = {}
 
-    def check(self):
+    def cfheck(self):
         for book in self.books:
             if book.author not in self.authorDict:
                 #if there is no key for the author,

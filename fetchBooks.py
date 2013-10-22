@@ -2,7 +2,7 @@
 
 import os
 from buzhug import Base
-import urllib
+import urllib2 as urllib
 import json
 import os.path as osp
 import sys
@@ -16,10 +16,14 @@ bookDB = Base(osp.join(dbDir, 'bookDB')).create(
     ('slug', unicode),
     ('author_id', int),
     ('reviewed', bool),
+    ('publish_status', bool),
+    ('text', unicode),
+    ('rating_value', int),
+    ('rating_total', int),
+    ('audience', unicode),
     ('language', unicode),
     ('json', unicode),
-    ('script_review_status', int),
-    mode=mode)
+    ('script_review_status', int), mode=mode)
 
 page = 1
 host = 'http://gbserver3a.cs.unc.edu'
@@ -38,20 +42,25 @@ while True:
         bytes = fp.read().decode('utf-8')
         book = json.loads(bytes)
         try:
-            #make sure record doesnt exist? Implelement later
             #check the stock reviewed status and put it in the field I will play with
             #2 is unsure spam, 1 is HAM, 0 is spam. The json only has T/F right now so will work with that
-            spam = 2
+            spam_stat = 2
             if book['reviewed']:
-                spam = 1
-
-
+                spam_stat = 1
+            pub = True
+            pages = book['pages']
+            t = ''
+            for p in pages:
+                t += p['text'] + '\n'
             bookDB.insert(
                 ID=int(book['ID']), slug=book['slug'],
-                author_id=int(book['author_id']), reviewed=book['reviewed'],
-                language=book['language'], json=bytes, script_review_status=spam)
+                author_id=int(book['author_id']), reviewed=book['reviewed'], publish_status=pub,
+                text=unicode(t), rating_value=int(book['rating_value']),
+                rating_total=int(book['rating_count']),
+                audience=unicode(book['audience']),
+                language=book['language'], json=bytes, script_review_status=spam_stat)
         except:
-            print book
+            print page
             raise
     page += 1
     print >>sys.stderr, page

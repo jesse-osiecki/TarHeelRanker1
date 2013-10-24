@@ -30,17 +30,16 @@ for un in unfound:
             #field I will play with
             #2 is unsure spam, 1 is HAM, 0 is spam.
             #The json only has T/F right now so will work with that
-            spam = 0
+            spam_stat = 0
             pub = False
-            if book['status'] == unicode("publish"):
-                pub = True
             t = ''
+            pages = book['pages']
             for p in pages:
                 t += p['text'] + '\n'
             bookDB.insert(
                 ID=int(book['ID']), slug=book['slug'],
                 author_id=int(book['author_id']), reviewed=book['reviewed'], publish_status=pub,
-                text=t, rating_value=int(book['rating_value']),
+                text=unicode(t), rating_value=int(book['rating_value']),
                 rating_total=int(book['rating_count']),
                 audience=unicode(book['audience']),
                 language=book['language'], json=bytes, script_review_status=spam_stat)

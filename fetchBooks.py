@@ -23,7 +23,9 @@ bookDB = Base(osp.join(dbDir, 'bookDB')).create(
     ('audience', unicode),
     ('language', unicode),
     ('json', unicode),
-    ('script_review_status', int), mode=mode)
+    ('script_review_status', int),
+    ('redis_score', int),
+    ('gibberish_score', int), mode=mode)
 
 page = 1
 host = 'http://gbserver3a.cs.unc.edu'
@@ -58,7 +60,8 @@ while True:
                 text=unicode(t), rating_value=int(book['rating_value']),
                 rating_total=int(book['rating_count']),
                 audience=unicode(book['audience']),
-                language=book['language'], json=bytes, script_review_status=spam_stat)
+                language=book['language'], json=bytes, script_review_status=spam_stat,
+                redis_score=-1, gibberish_score=-1)
         except:
             print page
             raise

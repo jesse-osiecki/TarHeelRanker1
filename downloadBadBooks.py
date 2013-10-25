@@ -42,7 +42,8 @@ for un in unfound:
                 text=unicode(t), rating_value=int(book['rating_value']),
                 rating_total=int(book['rating_count']),
                 audience=unicode(book['audience']),
-                language=book['language'], json=bytes, script_review_status=spam_stat)
+                language=book['language'], json=bytes, script_review_status=spam_stat,
+                redis_score=-1, gibberish_score=-1)
         except:
             print book
             raise

@@ -1,5 +1,5 @@
+#!/usr/bin/python2.7
 '''fetch all the books from the site, save them in a local db'''
-
 import os
 from buzhug import Base
 import urllib2 as urllib

@@ -6,6 +6,7 @@ import sys
 import pickle
 import os
 
+
 #now ge those books
 unfound = []
 fil = open('badguys', 'r+')

@@ -5,7 +5,7 @@ import os
 import sys
 import json
 
-
+print 'Enter THR bookID(s) seperated by a space'
 db = Base(os.getcwd() + '/db/bookDB')
 db.open()
 c=0

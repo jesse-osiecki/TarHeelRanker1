@@ -16,10 +16,13 @@ markov = markover.Markov()
 redis_bayes = False
 gibb = False
 markover = False
+author_check = False
+rating_check = False
 
 l = len(sys.argv)
 c = 0
 book_review_cache = {}
+#print repr(books[0])
 while c < l-1:
     c+=1
     inp = sys.argv[c]
@@ -29,11 +32,18 @@ while c < l-1:
         gibb = True
     if "m" in inp:
         markover = True
+    if "a" in inp:
+        author_check = True
+    if "s" in inp:
+        rating_check = True 
 #print redis_bayes, gibb, markover
-for b in random.shuffle(books):
+#books = random.shuffle(books)
+for b in books:
     rb_score = 0
     gibb_score = 0
     mark_score = 0
+    author_score = 0
+    rating_score = 0
     print b.text
     if redis_bayes:
         rb_score = rb.score(b.text)
@@ -44,6 +54,9 @@ for b in random.shuffle(books):
     if markover:
         mark_score = markov.score_text(b.text)
         print 'mark_score: ' , mark_score
+    if author_check:
+        
+    if rating_check:
     while True:
         feelings = raw_input('^^Would you say that this is a good book? Y/n --> ').lower()
         yes = set(['yes', 'y'])
@@ -57,4 +70,4 @@ for b in random.shuffle(books):
         else:
             print "Please enter a valid Y/n"
     book_review_cache[b.ID] = feelings
-    print book_review_cache
+    print book_review_cache #TODO pickle this
